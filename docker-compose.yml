@@ -27,3 +27,4 @@ services:
     image: akhmelik/docker.adminer
     ports:
       - "8080:80"
+      # docker-compose exec php /bin/bash
