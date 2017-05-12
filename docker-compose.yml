@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  php:
+    image: akhmelik/php7.1
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/www:/var/www/html"
+      - "./apache2/vhosts:/etc/apache2/from-host"
+      - "/etc/hosts:/etc/hosts"
+      #- "./php/php.ini:/etc/php/7.0/apache2/php.ini"
+      - "./apache2/log:/var/log/apache2"
+    links:
+      - "db:db"
+  db:
+    image: akhmelik/mysql5.6
+    environment:
+      - MYSQL_DATABASE=home
+      - MYSQL_USER=sroot
+      - MYSQL_PASSWORD=12345
+      - MYSQL_ROOT_PASSWORD=12345
+    ports:
+      - "3306:3306"
+  adminer:
+    image: akhmelik/docker.adminer
+    ports:
+      - "8080:80"
